@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Mobile File System Demo</title>
+    <link rel="stylesheet" href="css/style.css"></link>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="appworks.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+
+  </head>
+  <body>
+
+    <div id="intro-wrapper">
+      <div id="intro">
+        <div style="font-weight:bold; text-align:center; margin-bottom:8px;">AppWorks Mobile File System Demo</div>
+        <p>Mobile File System allows you perform file I/O operations, open files and transfer files</P>
+        <p>I/O methods: list, exists, rename, move, copy and remove</p>
+        <p>Open methods: open, share and quicklook</p>
+        <p>Transfer methods: download and upload</p>
+      </div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <h3 class="section-title" onclick="toggleSection('download-section')">Download</h3>
+      <div id="download-section" class="collapsable">
+          <div>
+            <div class="input-title">URL</div>
+            <input type="text" class="input-text" id="url" value="http://che.org.il/wp-content/uploads/2016/12/pdf-sample.pdf" />
+          </div>
+
+          <div>
+            <div class="input-title">Filename</div>
+            <input type="text" class="input-text" id="filename" value="pdf-sample.pdf" />
+          </div>
+
+          <div class="shared-wrapper">
+            <label for="shared">Shared </label><input type="checkbox" class="input-check" id="download-shared" />
+          </div>
+
+          <div>
+            <button type="button" class="go-button" class="go-button vertical-space" onclick="download('url', 'filename', 'download-shared');">Download File</button>
+          </div>
+      </div>
+
+      <h3 class="section-title" onclick="toggleSection('list-section')">List</h3>
+      <div id="list-section" class="collapsable">
+          <div class="shared-wrapper">
+            <label for="shared">Shared </label><input type="checkbox" class="input-check" id="list-shared" />
+          </div>
+          <div>
+            <button type="button" class="go-button" class="go-button vertical-space" onclick="list('', 'list-shared');">List Files</button>
+          </div>
+
+          <input type="hidden" id="selected-filename" />
+
+          <div>
+            <input type="text" class="input-text" id="list-directory" value="/" disabled />
+          </div>
+          <div class="list-table-wrapper" id="list-table-wrapper"></div>
+      </div>
+
+      <div id="file-section" class="panel">
+          <h3 class="section-title">File Options</h3>
+          <div>
+            <button type="button" class="go-button go-button-1" class="go-button vertical-space" onclick="exists('selected-filename','list-shared');">Exists</button>
+          </div>
+          <div>
+            <button type="button" class="go-button go-button-2" class="go-button vertical-space" onclick="showAction('rename');setRenameFields()">Rename</button>
+          </div>
+          <div>
+            <button type="button" class="go-button go-button-3" class="go-button vertical-space" onclick="showAction('move');setMoveFields()">Move</button>
+          </div>
+          <div>
+            <button type="button" class="go-button go-button-4" class="go-button vertical-space" onclick="showAction('copy');setCopyFields()">Copy</button>
+          </div>
+          <div>
+            <button type="button" class="go-button go-button-5" class="go-button vertical-space" onclick="showAction('remove')">Remove</button>
+          </div>
+          <div>
+            <button type="button" class="go-button go-button-6" class="go-button vertical-space" onclick="showAction('upload')">Upload</button>
+          </div>
+          <div>
+            <button type="button" class="go-button go-button-7" class="go-button vertical-space" onclick="openFile('selected-filename','list-shared');">Open</button>
+          </div>
+          <div>
+            <button type="button" class="go-button go-button-8" class="go-button vertical-space" onclick="share('selected-filename','list-shared');">Share</button>
+          </div>
+          <div>
+            <button type="button" class="go-button go-button-9" class="go-button vertical-space" onclick="quicklook('selected-filename','list-shared');">Quicklook</button>
+          </div>
+          <div>
+            <button type="button" class="go-button go-button-negative" class="go-button vertical-space" onclick="closePanel('file-section');">Cancel</button>
+          </div>
+      </div>
+
+          <div id="action-section" class="panel">
+            <div id="rename" class="action">
+              <h3 class="section-title">Rename File</h3>
+
+              <div class="action-content">
+                <div class="input-title">Current</div>
+                <input type="text" class="input-text" id="rename-source" disabled />
+              </div>
+
+              <div class="action-content">
+                <div class="input-title">New</div>
+                <input type="text" class="input-text" id="rename-destination" />
+              </div>
+
+              <button type="button" class="go-button" class="go-button vertical-space" onclick="rename('rename-source','rename-destination','list-shared');">Go</button>
+            </div>
+
+            <div id="move" class="action">
+                <h3 class="section-title">Move File</h3>
+
+                <div class="action-content">
+                  <div class="input-title">Current</div>
+                  <input type="text" class="input-text" id="move-source" disabled />
+                </div>
+
+                <div class="action-content">
+                  <div class="input-title">New</div>
+                  <input type="text" class="input-text" id="move-destination" />
+                </div>
+
+                <div class="action-content shared-wrapper">
+                  <label for="shared">Move to Shared </label><input type="checkbox" class="input-check" id="move-destination-shared" />
+                </div>
+
+              <button type="button" class="go-button" class="go-button vertical-space" onclick="move('move-source','list-shared','move-destination','move-destination-shared');">Go</button>
+            </div>
+
+            <div id="copy" class="action">
+              <h3 class="section-title">Copy File</h3>
+
+              <div class="action-content">
+                <div class="input-title">Current</div>
+                <input type="text" class="input-text" id="copy-source" disabled />
+              </div>
+
+              <div class="action-content">
+                <div class="input-title">New</div>
+                <input type="text" class="input-text" id="copy-destination" />
+              </div>
+
+              <div class="action-content shared-wrapper">
+                <label for="shared">Copy to Shared </label><input type="checkbox" class="input-check" id="copy-destination-shared" />
+              </div>
+              <button type="button" class="go-button" class="go-button vertical-space" onclick="copy('copy-source','list-shared','copy-destination','copy-destination-shared');">Go</button>
+            </div>
+
+            <div id="remove" class="action">
+            <h3 class="section-title">Remove File Confirm</h3>
+              <button type="button" class="go-button" class="go-button vertical-space" onclick="remove('selected-filename','list-shared');">Go</button>
+            </div>
+
+            <div id="upload" class="action">
+            <h3 class="section-title">Upload File</h3>
+              <div class="action-content">
+                <div class="input-title">URL</div>
+                <input type="text" class="input-text" id="upload-destination" />
+              </div>
+
+              <div class="action-content">
+                <div class="input-title">File Parameter Name</div>
+                <input type="text" class="input-text" id="file-parameter-name" />
+              </div>
+
+              <div class="action-content">
+                <form name="upload-form" id="upload-form">
+                  <div class="input-title">Form Data <div onclick="addFormKeyValueInput()" class="addKeyValueButton">(Add key/value)</div></div>
+                  <div class="input-text input-text-half-left">Key</div>
+                  <div class="input-text input-text-half-right">Value</div>
+                  <div id="form-key-value-wrapper"></div>
+                </form>
+              </div>
+
+              <button type="button" class="go-button" class="go-button vertical-space" onclick="upload('selected-filename', 'upload-destination', 'file-parameter-name', 'list-shared');">Go</button>
+            </div>
+
+            <div>
+              <button type="button" class="go-button go-button-negative" class="go-button vertical-space" onclick="closeActions();">Cancel</button>
+            </div>
+          </div>
+
+          <h3 class="section-title" onclick="toggleSection('imports-section')">Imports</h3>
+          <div id="imports-section" class="collapsable">
+              <p>Import a file via another app on your device using "Open In".</p>
+              <div>
+                <button type="button" class="go-button" class="go-button vertical-space" onclick="listImports();">List Imported Files</button>
+              </div>
+
+              <input type="hidden" id="selected-import-filename" />
+
+              <div class="list-table-wrapper" id="imports-table-wrapper"></div>
+          </div>
+
+          <div id="import-file-section" class="panel">
+            <h3 class="section-title">Move Import</h3>
+
+            <div class="action-content">
+              <div class="input-title">Filename</div>
+              <input type="text" class="input-text" id="import-destination" />
+            </div>
+
+            <div class="action-content shared-wrapper">
+              <label for="shared">Move to Shared </label><input type="checkbox" class="input-check" id="import-destination-shared" />
+            </div>
+
+          <button type="button" class="go-button" class="go-button vertical-space" onclick="moveImport('selected-import-filename','import-destination','import-destination-shared');">Go</button>
+          <div>
+            <button type="button" class="go-button go-button-negative" class="go-button vertical-space" onclick="closeImportAction();">Cancel</button>
+          </div>
+        </div>
+
+      <div id="result"></div>
+    </div>
+  </body>
+</html>

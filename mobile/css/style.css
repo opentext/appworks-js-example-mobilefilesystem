@@ -1,0 +1,211 @@
+html, body {
+  margin:0;
+  padding:0;
+  font-family: "arial";
+  font-size:97.5%;
+  color:#646464;
+}
+
+#intro-wrapper {
+  margin:8px;
+  padding:16px;
+  background:#e2e2e2;
+}
+
+#intro {
+  background: #ffffff;
+  padding:8px;
+  border:1px dashed #a8a8a8;
+}
+
+#textblock {
+  margin:8px;
+  padding:16px;
+  background:#ffffff;
+}
+
+.content-wrapper {
+  margin:8px 8px 300px 8px;
+  padding:0;
+}
+
+#target-location {
+    width: 100%;
+    margin:0 0 16px 0;
+    height:32px;
+    font-size:1em;
+    padding:0 8px;
+    box-sizing:border-box;
+}
+
+.go-button {
+  width: 100%;
+  border: 0;
+  height:32px;
+  font-size:1em;
+  background: #11aaff;
+  color:#ffffff;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.go-button-negative {
+  background: #ff0000;
+  color:#ffffff;
+}
+.go-button-1 {
+  background: #11aaff;
+  color:#ffffff;
+}
+.go-button-2 {
+  background: #11aacc;
+  color:#ffffff;
+}
+.go-button-3 {
+  background: #11aa99;
+  color:#ffffff;
+}
+.go-button-4 {
+  background: #11aa55;
+  color:#ffffff;
+}
+.go-button-5 {
+  background: #11aa00;
+  color:#ffffff;
+}
+.go-button-6 {
+  background: #339933;
+  color:#ffffff;
+}
+.go-button-7 {
+  background: #668866;
+  color:#ffffff;
+}
+.go-button-8 {
+  background: #997799;
+  color:#ffffff;
+}
+.go-button-9 {
+  background: #bb77bb;
+  color:#ffffff;
+}
+
+.input-text {
+  display: block;
+  width: 95%;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.input-text-half-left {
+  float: left;
+  width: 45%;
+}
+.input-text-half-right {
+  float: right;
+  width: 45%;
+}
+
+.vertical-space {
+    margin-bottom: 8px;
+}
+
+.input-title {
+  font-weight: bold;
+}
+
+#result-wrapper {
+  margin:8px;
+  padding:16px;
+  background:#e2e2e2;
+}
+
+#result {
+  background: #ffffff;
+  padding:8px;
+  border:1px dashed #a8a8a8;
+  height:60px;
+  overflow-y: auto;
+  overflow-x: auto;
+
+  margin-top:16px;
+}
+.shared-wrapper {
+    margin-bottom:8px;
+}
+.shared-wrapper label {
+  line-height: 24px;
+  font-weight: bold;
+}
+.shared-wrapper input {
+  margin-left:8px;
+}
+
+.section-title {
+  display: block;
+  background: #fff;
+  font-size: 110%;
+  margin: 0;
+  padding: 4px 4px 4px 24px;
+  border: 1px solid #bbbbbb;
+  margin-top:2px;
+  cursor: pointer;
+}
+.collapsable {
+  border-left: 1px solid #bbbbbb;
+  border-right: 1px solid #bbbbbb;
+  padding: 8px;
+  background: #bbffbb;
+  display: none;
+}
+
+.list-table-wrapper table {
+  border-collapse: collapse;
+  width:100%;
+  border: 1px solid #bbbbbb;
+}
+
+.list-table-wrapper thead th {
+  background: #d7d7d7;
+  text-align: left;
+  padding: 4px;
+}
+
+.list-table-wrapper thead tr {
+  border-bottom: 1px solid #898989;
+}
+
+.list-table-wrapper tbody td {
+  background: #ffffff;
+  padding: 4px;
+}
+
+.list-table-wrapper tbody tr {
+  border-bottom: 1px solid #bbbbbb;
+  cursor: pointer;
+}
+
+.list-col-1 {
+  width:40px;
+}
+.list-col-3 {
+  width:80px;
+}
+.hidden {
+  display:none;
+}
+
+.action {
+  background: #ddffdd;
+}
+.action h3 {
+  margin-bottom:8px;
+}
+
+.panel {
+  display:none;
+}
+.addKeyValueButton {
+  display: inline;
+  text-decoration: underline;
+  cursor: pointer;
+}
